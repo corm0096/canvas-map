@@ -35,7 +35,7 @@ function geotest()//This function will determine if there's geolocation code and
 function havelocation(pos)
 {
 	loc=pos;
-	showdata();
+	loaddata();
 }
 
 function GPSerror(error)
@@ -56,21 +56,27 @@ function GPSerror(error)
 
 	//position.coords.latitude, longitude, etc.
 
+function loaddata()
+{
+	//Google maps loads this.  Hoping to forestall google undefined errors here.
+	loadedcounts++;
+		if (loadedcounts<2)
+		{
+			return;
+		}
+		showdata();
+}
 
 function showdata()
 {
 	var map;
-	loadedcounts++;
-	alert(loadedcounts);
-	if (loadedcounts<2)
-		{
-			return;
-		}
+
 	canvas=document.createElement("canvas");
 	mainpage.appendChild(canvas);
 	
 	var long=loc.coords.longitude;
 	var lat=loc.coords.latitude;
+	alert(lat+", "+long);
 	map=new google.maps.Map(canvas,
 								{center:{lat:lat, lng:long},zoom:14});
 	
