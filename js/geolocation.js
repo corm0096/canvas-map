@@ -50,7 +50,7 @@ function GPSerror(error)
 
 	//position.coords.latitude, longitude, etc.
 
-loaddata(pos)
+function loaddata(pos)
 {
 	loc=pos;
 	showdata();
