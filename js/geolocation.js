@@ -1,13 +1,7 @@
 document.addEventListener("DOMContentLoaded",main)
 
-var mainpage, canvas; //Elements for the webpage.
-var loadedcounts=0; //Incremented when google maps loads and the geodata loads.
-var loc;// geocoordinates.
-function main()
+function main() //A barebones function, yes, but I'd add more in a larger project.
 {
-
-	mainpage=document.querySelector("body");
-
 	if (!geotest()) // Don't bother doing anything else if there's no geolocation.
 	{
 		return;
@@ -48,34 +42,23 @@ function GPSerror(error)
 		}
 }
 
-	//position.coords.latitude, longitude, etc.
 
-function loaddata(pos)
+function loaddata(loc)
 {
-	loc=pos;
-	showdata();
-}
-
-function showdata()
-{
-	loadedcounts++
-	alert(loadedcounts);
-	if (loadedcounts<2)
-		{
-
-			return;
-		}
-	var map;
-
-	canvas=document.createElement("canvas");
-	mainpage.appendChild(canvas);
+	var canvas=document.createElement("canvas");
+	document.querySelector("body").appendChild(canvas);
+	canvas.setAttribute("height", 400);
+	canvas.setAttribute("width", 400);
+	var context=canvas.getContext("2d");
 	
 	var long=loc.coords.longitude;
 	var lat=loc.coords.latitude;
-	alert(lat+", "+long);
-	map=new google.maps.Map(canvas,
-								{center:{lat:lat, lng:long},zoom:14});
+	var URL="https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long
+		+"&zoom=14&size=400x400&key=AIzaSyDWuaomVmfQTx-qbLYmZ2-CmVlZLMAdI0M";
 	
+	var image=document.createElement("img");
+	image.setAttribute("src",URL);
+	
+	context.drawImage(image,0,0);
+	console.log(URL);	
 }
-//corm0096-gmaps-key
-//AIzaSyAOfw2qcUZlRwI-rlauKJb7pJr388ihyT0
