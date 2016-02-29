@@ -59,10 +59,12 @@ function loaddata()
 {
 	//Google maps loads this.  Hoping to forestall google undefined errors here.
 	loadedcounts++;
+	alert(loadedcounts);
 		if (loadedcounts<2)
 		{
 			return;
 		}
+		
 		showdata();
 }
 
