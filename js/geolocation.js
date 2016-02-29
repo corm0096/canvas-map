@@ -54,11 +54,11 @@ function loaddata(loc)
 	var long=loc.coords.longitude;
 	var lat=loc.coords.latitude;
 	var URL="https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+long
+		+"&markers=color:red|label:C|"+lat+","+long
 		+"&zoom=14&size=400x400&key=AIzaSyDWuaomVmfQTx-qbLYmZ2-CmVlZLMAdI0M";
 	
 	var image=document.createElement("img");
 	image.setAttribute("src",URL);
 	
 	context.drawImage(image,0,0);
-	console.log(URL);	
 }
