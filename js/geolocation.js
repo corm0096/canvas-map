@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded",main)
 
 var mainpage, canvas; //Elements for the webpage.
 var loadedcounts=0; //Incremented when google maps loads and the geodata loads.
-
+var loc;// geocoordinates.
 function main()
 {
 
@@ -22,7 +22,7 @@ function geotest()//This function will determine if there's geolocation code and
 	
 	if (navigator.geolocation)
 		{
-			navigator.geolocation.getCurrentPosition(showdata,GPSerror,param);
+			navigator.geolocation.getCurrentPosition(havelocation,GPSerror,param);
 			return true;
 		}
 	else
@@ -30,6 +30,12 @@ function geotest()//This function will determine if there's geolocation code and
 			mainpage.innerHTML="<p>Your browser does not support geolocation.</p>";
 			return false;
 		}	
+}
+
+function havelocation(pos)
+{
+	loc=pos;
+	showdata();
 }
 
 function GPSerror(error)
@@ -62,8 +68,8 @@ function showdata()
 	canvas=document.createElement("canvas");
 	mainpage.appendChild(canvas);
 	
-	var long=position.coords.longitude;
-	var lat=position.coords.latitude;
+	var long=loc.coords.longitude;
+	var lat=loc.coords.latitude;
 	var map=new google.maps.Map(canvas,
 								{center:{lat:lat, lng:long},zoom:14});
 	
