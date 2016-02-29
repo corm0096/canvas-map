@@ -21,7 +21,7 @@ function geotest()//This function will determine if there's geolocation code and
 	
 	if (navigator.geolocation)
 		{
-			navigator.geolocation.getCurrentPosition(havelocation,GPSerror,param);
+			navigator.geolocation.getCurrentPosition(loaddata,GPSerror,param);
 			return true;
 		}
 	else
@@ -31,11 +31,6 @@ function geotest()//This function will determine if there's geolocation code and
 		}	
 }
 
-function havelocation(pos)
-{
-	loc=pos;
-	loaddata();
-}
 
 function GPSerror(error)
 {
@@ -55,21 +50,21 @@ function GPSerror(error)
 
 	//position.coords.latitude, longitude, etc.
 
-function loaddata()
+loaddata(pos)
 {
-	//Google maps loads this.  Hoping to forestall google undefined errors here.
-	loadedcounts++;
-	alert(loadedcounts);
-		if (loadedcounts<2)
-		{
-			return;
-		}
-		
-		showdata();
+	loc=pos;
+	showdata();
 }
 
 function showdata()
 {
+	loadedcounts++
+	alert(loadedcounts);
+	if (loadedcounts<2)
+		{
+
+			return;
+		}
 	var map;
 
 	canvas=document.createElement("canvas");
