@@ -59,6 +59,7 @@ function GPSerror(error)
 
 function showdata()
 {
+	var map;
 	loadedcounts++;
 	alert(loadedcounts);
 	if (loadedcounts<2)
@@ -70,7 +71,7 @@ function showdata()
 	
 	var long=loc.coords.longitude;
 	var lat=loc.coords.latitude;
-	var map=new google.maps.Map(canvas,
+	map=new google.maps.Map(canvas,
 								{center:{lat:lat, lng:long},zoom:14});
 	
 }
